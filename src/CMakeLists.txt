@@ -43,6 +43,7 @@ target_link_libraries( pandora-shared
                        ${Boost_LIBRARIES}
                        ${GDAL_LIBRARY}
                        ${MPI_CXX_LIBRARIES}
+                       ${PYTHON_LIBRARIES}
                        tinyxml-shared
                      )
 
