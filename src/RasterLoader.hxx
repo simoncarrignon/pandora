@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2012
  * COMPUTER APPLICATIONS IN SCIENCE & ENGINEERING
@@ -28,29 +27,25 @@
 
 namespace Engine
 {
+    class StaticRaster;
+    class World;
 
-class StaticRaster;
-class World;
+    class RasterLoader
+    {
+    public:
+	    RasterLoader();
+	    virtual ~RasterLoader();
 
-class RasterLoader
-{
-public:
-	RasterLoader();
-	virtual ~RasterLoader();
+	    // load a GDAL file conforming World position
+	    void fillGDALRaster( StaticRaster & raster, const std::string & fileName, const Rectangle<int> & definedBoundaries = Rectangle<int>());
+	    // load an HDF5 conforming adjusting raster to data, or to World position if not null
+        void fillHDF5RasterDirectPath( StaticRaster & raster, const std::string & fileName, const std::string & pathToData, World * world );
 
-	// load a GDAL file conforming World position
-	void fillGDALRaster( StaticRaster & raster, const std::string & fileName, const Rectangle<int> & definedBoundaries = Rectangle<int>());
-	// load an HDF5 conforming adjusting raster to data, or to World position if not null
-    void fillHDF5RasterDirectPath( StaticRaster & raster, const std::string & fileName, const std::string & pathToData, World * world );
-
-    // load an HDF5 from a serialized dynamic raster at a given time step
-    void fillHDF5Raster( StaticRaster & raster, const std::string & fileName, const std::string & rasterName, int step, World * world = 0);
-    // load an HDF5 from a serialized static raster
-	void fillHDF5Raster( StaticRaster & raster, const std::string & fileName, const std::string & rasterName, World * world = 0);
-	// load a raster file from a GRASS database conforming adjusting raster to data, or to World position if not null
-}; 
-
+        // load an HDF5 from a serialized dynamic raster at a given time step
+        void fillHDF5Raster( StaticRaster & raster, const std::string & fileName, const std::string & rasterName, int step, World * world = 0);
+        // load an HDF5 from a serialized static raster
+	    void fillHDF5Raster( StaticRaster & raster, const std::string & fileName, const std::string & rasterName, World * world = 0);
+	    // load a raster file from a GRASS database conforming adjusting raster to data, or to World position if not null
+    };
 } // namespace Engine
-
 #endif // __RasterLoader_hxx__
-
