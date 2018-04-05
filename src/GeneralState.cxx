@@ -6,18 +6,18 @@ namespace Engine
 
     GeneralState & GeneralState::instance( )
     {
-	    if (!_instance)
-	    {
-		    _instance = new GeneralState;		
-	    }
-	    return *_instance;
+        if ( !_instance )
+        {
+            _instance = new GeneralState;
+        }
+        return *_instance;
     }
 
-    GeneralState::GeneralState()
+    GeneralState::GeneralState( )
     {
     }
 
-    GeneralState::~GeneralState()
+    GeneralState::~GeneralState( )
     {
     }
 } // namespace Engine
