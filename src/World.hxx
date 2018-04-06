@@ -170,6 +170,8 @@ public:
     AgentsList::iterator endAgents( ) { return _agents.end( ); }
     size_t getNumberOfRasters( ) const { return _rasters.size( ); }
     size_t getNumberOfAgents( ) const { return _agents.size( ); }
+    size_t getNumberOfTypedAgents( const std::string & type ) const;
+
     void eraseAgent( AgentsList::iterator & it ) { _agents.erase( it ); }
     void removeAgent( Agent * agent );
     void removeAgent( std::shared_ptr<Agent> agentPtr );

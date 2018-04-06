@@ -72,6 +72,7 @@ public:
 
     // TODO boost timer?
     double getWallTime( ) const;
+    size_t getNumberOfTypedAgents( const std::string & type ) const { return 0; }
 
     void addStringAttribute( const std::string & type, const std::string & key, const std::string & value );
     void addFloatAttribute( const std::string & type, const std::string & key, float value );

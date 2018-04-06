@@ -180,6 +180,7 @@ public:
 
     //! MPI version of wall time
     double getWallTime( ) const;
+    size_t getNumberOfTypedAgents( const std::string & type ) const;
 
     void addIntAttribute( const std::string & type, const std::string & key, int value );
     void addStringAttribute( const std::string & type, const std::string & key, const std::string & value );

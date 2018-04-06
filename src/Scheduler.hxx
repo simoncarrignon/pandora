@@ -91,6 +91,7 @@ namespace Engine
         const int & getNumTasks( ) const { return _numTasks; }
         //! MPI version of wall time
         virtual double getWallTime( ) const = 0;
+        virtual size_t getNumberOfTypedAgents( const std::string & type ) const = 0;
 
         // agent addition, removal and getters
         //! do anything needed after adding agent to the list of World _agents

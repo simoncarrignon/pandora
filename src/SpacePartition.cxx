@@ -1566,6 +1566,21 @@ double SpacePartition::getWallTime( ) const
     return MPI_Wtime( ) - _initialTime;
 }
 
+size_t SpacePartition::getNumberOfTypedAgents( const std::string & type ) const
+{
+    size_t N;
+    size_t n = 0;
+    AgentsList::iterator it = _world->beginAgents( );
+    while( it!=_world->endAgents( ) )
+    {
+        AgentPtr agent = *it;
+        if ( agent->isType( type ) ) n++;
+        it++;
+    }
+    MPI_Allreduce( &n, &N, 1, MPI_UNSIGNED_LONG, MPI_SUM, MPI_COMM_WORLD );
+    return N;
+}
+
 void SpacePartition::addStringAttribute( const std::string & type, const std::string & key, const std::string & value )
 {
     _serializer.addStringAttribute( type, key, value );
