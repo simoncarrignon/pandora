@@ -143,9 +143,7 @@ namespace Engine
 
         log_INFO( logName.str( ), getWallTime( ) << " closing files" );
         _scheduler->finish( );
-    }World.cxx
-
-
+    }
 
     int World::getCurrentStep( ) const
     {
