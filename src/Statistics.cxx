@@ -189,7 +189,6 @@ namespace Engine
         urandom.open( "/dev/urandom" );
         urandom.read( reinterpret_cast<char*> ( &seed ), sizeof( seed ));
         urandom.close( );
-        //std::cout << "seed: " << seed << std::endl;
         return seed;
     }
 } // namespace Engine

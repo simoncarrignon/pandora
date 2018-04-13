@@ -170,6 +170,7 @@ namespace Engine
         int numExecutedAgents = 0;
         AgentsList agentsToSend;
 
+
     #ifndef PANDORAEDEBUG
         // shared memory distibution for read-only planning actions, disabled for extreme debug
         #pragma omp parallel for
@@ -185,6 +186,7 @@ namespace Engine
         {
             AgentPtr agent = agentsToExecute.at( i );
             log_DEBUG( logName.str( ), getWallTime( ) << " agent: " << agent << " being executed at index: " << sectionIndex << " of task: "<< _id << " in step: " << _world->getCurrentStep( ) );
+
             agentsToExecute.at( i )->executeActions( );
             agentsToExecute.at( i )->updateState( );
             log_DEBUG( logName.str( ), getWallTime( ) << " agent: " << agent << " has been executed at index: " << sectionIndex << " of task: "<< _id << " in step: " << _world->getCurrentStep( ) );
@@ -192,6 +194,7 @@ namespace Engine
             if ( !_ownedArea.contains( agent->getPosition( ) ) && !willBeRemoved( agent->getId( ) ))
             {
                 log_DEBUG( logName.str( ), getWallTime( ) << " migrating agent: " << agent << " being executed at index: " << sectionIndex << " of task: "<< _id );
+                std::cout << _id << "  Migrating agent: " << agent << "\n";
                 agentsToSend.push_back( agent );
 
                 // the agent is no longer property of this world
@@ -199,6 +202,9 @@ namespace Engine
                 // it will be deleted
                 _world->eraseAgent( itErase );
                 _overlapAgents.push_back( agent );
+
+                std::cout << _id << "  ag_T_Send: " << agentsToSend.size() << "  n_ag: " << _world->getNumberOfAgents()  << "  Ov_ag: " << _overlapAgents.size()<< "\n";
+
                 log_DEBUG( logName.str( ), getWallTime( ) <<  "putting agent: " << agent << " to overlap" );
             }
             else
@@ -233,7 +239,6 @@ namespace Engine
             // add each agent to the list of the neighbour where it will be sent
             std::vector< AgentsList > agentsToNeighbors;
             agentsToNeighbors.resize( _neighbors.size( ) );
-
 
             for ( AgentsList::iterator it=agentsToSend.begin( ); it!=agentsToSend.end( ); it++ )
             {
@@ -784,6 +789,7 @@ namespace Engine
 
     void SpacePartition::executeAgents( )
     {
+        std::cout << _world->getId( ) << " n_a=" << _world->getNumberOfAgents( ) << " ov_a=" << _overlapAgents.size( ) << "\n";
         for ( int sectionIndex=0; sectionIndex<4; sectionIndex++ )
         {
             // section index doesn't matter if is the entire overlap
@@ -815,6 +821,8 @@ namespace Engine
 
             receiveGhostAgents( sectionIndex );
             log_DEBUG( logNameMpi.str( ), getWallTime( ) << " executing step: " << _world->getCurrentStep( ) << " and section: " << sectionIndex << " received ghosts" );
+
+            MPI_Barrier( MPI_COMM_WORLD );
 
             sendOverlapZones( sectionIndex );
             log_DEBUG( logNameMpi.str( ), getWallTime( ) << " executing step: " << _world->getCurrentStep( ) << " and section: " << sectionIndex << " sent overlap" );

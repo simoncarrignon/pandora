@@ -211,7 +211,6 @@ namespace Engine
 
         /* Restore previous error handler */
         H5Eset_auto( H5E_DEFAULT, oldfunc, old_client_data );
-        std::cout << "checking: " << oss2.str( ) << " -> " << colorTableId << std::endl;
 
         if ( colorTableId>0 )
         {

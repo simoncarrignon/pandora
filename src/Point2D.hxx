@@ -95,6 +95,13 @@ public:
         return *this;
     }
 
+    Point2D<Type> & operator-=( const Point2D<Type> & point )
+    {
+        _x -= point._x;
+        _y -= point._y;
+        return *this;
+    }
+
     // global arithmethic operations
     Point2D<Type> operator+( const Type & value ) const
     {
