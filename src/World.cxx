@@ -119,9 +119,7 @@ namespace Engine
         }
         stepEnvironment( );
         log_DEBUG( logName.str( ), getWallTime( ) << " step: " << _step << " has executed step environment" );
-        std::cout << "*******  executeAgents( )\n";
         _scheduler->executeAgents( );
-        std::cout << "*******  removeAgents( )\n";
         _scheduler->removeAgents( );
         log_INFO( logName.str( ), getWallTime( ) << " finished step: " << _step );
     }
