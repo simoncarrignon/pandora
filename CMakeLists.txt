@@ -19,7 +19,7 @@ else( )
     set( BOOST_PYTHON_STRING "python-py${PYTHON_VERSION_MAJOR}${PYTHON_VERSION_MINOR}" )
 endif()
 
-find_package( Boost COMPONENTS filesystem system timer ${BOOST_PYTHON_STRING} REQUIRED )
+find_package( Boost COMPONENTS filesystem system timer  REQUIRED )
 
 # User should set GDAL_DIR or GDAL_ROOT if necessary
 find_package( GDAL REQUIRED )
